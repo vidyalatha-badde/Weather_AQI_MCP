@@ -1,20 +1,20 @@
 # WeatherAQI MCP Assistant
 ## Introduction
 The sample **`WeatherAQI MCP Assistant`** is an interactive, asynchronous assistant that brings together real-time weather and AQI (Air Quality Index) data using powerful MCP (Model Context Protocol) servers.
-It seamlessly connects to dedicated weather and AQI tools on **Intel® Core™ Ultra Processors** then uses [Qwen/Qwen2.5-3B-Instruct](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct) to analyze the data and generate clear, actionable health and safety recommendations. The Qwen2.5-3B-Instruct model is loaded using the [**PyTorch XPU backend**](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html) to leverage Intel hardware acceleration.\
+It seamlessly connects to dedicated weather and AQI tools on **Intel® Core™ Ultra Processors** then uses [**Qwen/Qwen2.5-3B-Instruct**](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct) to analyze the data and generate clear, actionable health and safety recommendations. The Qwen2.5-3B-Instruct model is loaded using the [**PyTorch XPU backend**](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html) to leverage Intel hardware acceleration.\
 This assistant helps users stay informed about environmental conditions and make better decisions for their well-being. Designed with async operations and SSE connections, it’s perfect for modern, event-driven pipelines.
 
 ## Table of Contents
 
 - [Sample Workflow](#sample-workflow)
 - [Project Structure](#project-structure)
+- [Weather & AQI Data Requirements](#weather--aqi-data-requirements)
 - [Pre-requisites](#pre-requisites)
 - [Installing Prerequisites && Setting Up the Environment](#installing-prerequisites--setting-up-the-environment)
    - [For Windows](#for-windows)
    - [For Linux](#for-linux)
 - [Running the Sample && execution output](#running-the-sample--execution-output)
 - [Troubleshooting](#troubleshooting)
-- [License](#license)
 ---
 
 ## Sample Workflow
@@ -33,9 +33,42 @@ This diagram illustrates how the WeatherAQI MCP Assistant operates end-to-end wi
     │   ├── WeatherAQI_MCP_Assistant_Workflow.png                          # Workflow image
     │   └── safety_measures.png                                            # Output screenshot image 2
     ├── Readme.md                                                          # Readme file which contains all the details and instructions about the project sample
+    ├── weather_server.py                                     # Notebook file to excute the project sample
+    ├── Air-Quality-Index_server.py                                     # Notebook file to excute the project sampl
+    ├── LLM_inference_server.py                                     # Notebook file to excute the project sample
     ├── weatherAQI_MCP_Assistant.ipynb                                     # Notebook file to excute the project sample
     ├── pyproject.toml                                                     # Requirements for the project sample
     └── uv.lock                                                            # File which captures the packages installed for the project sample
+
+---
+
+## Weather & AQI Data Requirements
+
+This project uses two public APIs to provide real-time weather and air quality information:
+  1. **Open-Meteo API**\
+     Purpose:
+      - Geocoding: Convert a city or place name into coordinates (latitude & longitude).
+      - Weather Forecast: Get current weather data (temperature, wind speed, etc.)
+      
+     Usage:
+      - No API key required! Open-Meteo is free for testing and development.
+  2. **OpenWeatherMap API**\
+     Purpose:
+      - Provides Air Quality Index (AQI) and detailed pollutant data for any coordinates
+     
+     Usage:
+      - OpenWeatherMap requires an API key for all AQI endpoints.
+     
+     To get API key:
+      - Sign up [here](https://home.openweathermap.org/users/sign_in)
+      - Log in and go to API keys in your account dashboard.
+      - Copy your key.
+     
+     Add it to the project:
+      - Create a .env file in your project root:
+      ```
+      AQI_API_KEY=<aqi_key>
+      ```
 
 ---
 
@@ -118,26 +151,26 @@ To install any software using commands, Open a new terminal window by right-clic
 3. Run all MCP servers locally:\
 
    This sample has 3 MCP servers (runs on 3 different ports):
-     - **Weather** 
-     - **AQI (Air Quality Index)** 
-     - **LLM Inference**
+     - **Weather** (port no - 8000)
+     - **AQI (Air Quality Index)** (port no - 8001)
+     - **LLM (Large Language Model) Inference** (port no - 8002)
   
    To run them all, open **3 separate terminals**
   
    Terminal 1: Start the Weather MCP server
    ```
-   uv run weather-server.py
+   uv run weather_server.py
    ```
    Terminal 2: Start the AQI MCP server
    ```
-   uv run aqi_server.py
+   uv run Air-Quality-Index_server.py
    ```
    Terminal 3: Start the LLM Inferencing MCP server
    ```
-   uv run llm_inference_server.py
+   uv run LLM_inference_server.py
    ```
    
-4. Launch Jupyter Lab and Run the notebook:\
+4. Launch Jupyter Lab and Run the notebook:
    
    Open the [WeatherAQI MCP Assistant](./weatherAQI_MCP_Assistant.ipynb) notebook in the Jupyter Lab.
    - In the Jupyter Lab go to the kernel menu in the top-right corner of the notebook interface and choose default kernel i.e. `Python 3 (ipykernel)` from the available kernels list and run the code cells one by one in the notebook.
@@ -160,6 +193,3 @@ To install any software using commands, Open a new terminal window by right-clic
 
 ---
 
-## License
-
-This project is licensed under the MIT License. See [LICENSE](../LICENSE) for details.
