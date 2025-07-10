@@ -12,7 +12,6 @@ dependencies = [
     "fastmcp==2.5.2",
     "httpx==0.28.1",
     "transformers==4.51.3",
-    "accelerate==1.7.0",
 ]
 
 [tool.uv.sources]
