@@ -33,9 +33,9 @@ This diagram illustrates how the WeatherAQI MCP Assistant operates end-to-end wi
     │   ├── WeatherAQI_MCP_Assistant_Workflow.png                          # Workflow image
     │   └── safety_measures.png                                            # Output screenshot image 2
     ├── Readme.md                                                          # Readme file which contains all the details and instructions about the project sample
-    ├── weather_server.py                                     # Notebook file to excute the project sample
-    ├── Air-Quality-Index_server.py                                     # Notebook file to excute the project sampl
-    ├── LLM_inference_server.py                                     # Notebook file to excute the project sample
+    ├── weather_server.py                                                  # python file that retrives weather information
+    ├── Air-Quality-Index_server.py                                        # python file that retrives Air Quality Index(AQI) information
+    ├── LLM_inference_server.py                                            # python file which gives safety guidelines based on weather and AQI reports
     ├── weatherAQI_MCP_Assistant.ipynb                                     # Notebook file to excute the project sample
     ├── pyproject.toml                                                     # Requirements for the project sample
     └── uv.lock                                                            # File which captures the packages installed for the project sample
@@ -148,7 +148,7 @@ To install any software using commands, Open a new terminal window by right-clic
    ```
    uv run huggingface-cli download Qwen/Qwen2.5-3B-Instruct
    ```
-3. Run all MCP servers locally:\
+3. Run all MCP servers locally:
 
    This sample has 3 MCP servers (runs on 3 different ports):
      - **Weather** (port no - 8000)
@@ -172,7 +172,7 @@ To install any software using commands, Open a new terminal window by right-clic
    
 4. Launch Jupyter Lab and Run the notebook:
    
-   Open the [WeatherAQI MCP Assistant](./weatherAQI_MCP_Assistant.ipynb) notebook in the Jupyter Lab.
+   Open the [WeatherAQI MCP Assistant](./WeatherAQI%20MCP%20Assistant.ipynb) notebook in the Jupyter Lab.
    - In the Jupyter Lab go to the kernel menu in the top-right corner of the notebook interface and choose default kernel i.e. `Python 3 (ipykernel)` from the available kernels list and run the code cells one by one in the notebook.
    ```
    uv run jupyter lab
