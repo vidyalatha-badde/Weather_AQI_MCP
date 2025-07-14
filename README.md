@@ -21,6 +21,23 @@ This assistant helps users stay informed about environmental conditions and make
 
 This diagram illustrates how the WeatherAQI MCP Assistant operates end-to-end within an AI PC environment, combining MCP Compliant Servers, an MCP client, and external APIs.
 
+**User input:**
+   - User enters the desired location name (e.g. "Tokyo") to get the weather and AQI data of that particular area. MCP Client (Weather & AQI Advisory) uses this input and sends this to two different MCP servers.
+     
+**Air Quality Index MCP server:**
+   - The location received from the MCP client is converted to corresponding latitude and longitude using [geocoding API](https://open-meteo.com/en/docs/geocoding-api) which in turn used by the air pollution API.
+   - The Air Quality Index (AQI) server uses the latitude and longitude parameters received from the above mentioned geocoding API to make an API call to [OpenWeatherMap Air Pollution API](https://openweathermap.org/api/air-pollution) to get AQI data and pollutant levels. This AQI data is returned to the MCP client.
+
+**Weather MCP server:**
+   - The location received from the MCP client is converted to corresponding latitude and longitude using [geocoding API](https://open-meteo.com/en/docs/geocoding-api) which in turn used by the weather forecast API.
+   - The Weather server uses the latitude and longitude parameters received from the above mentioned geocoding API to make an API call to the [Open-Meteo Weather Forecast API](https://open-meteo.com/en/docs#api_response) to get current temperature, wind speed, and other weather details. This weather data is also returned to the MCP client.
+
+**LLM Inferencing MCP server:**
+   - The MCP client then passes both the weather and AQI reports to the LLM (large language model) Inferencing server. The LLM generates personalized safety guidelines based on the combined information.
+
+**Final result:**
+   - The final output from the LLM (e.g., safety advice, health risks, and precautions) is sent back to the MCP client, which presents it to the user.
+
 ![How it works](./assets/WeatherAQI_MCP_Assistant_Workflow.png)
 
 ---
@@ -33,9 +50,9 @@ This diagram illustrates how the WeatherAQI MCP Assistant operates end-to-end wi
     │   ├── WeatherAQI_MCP_Assistant_Workflow.png                          # Workflow image
     │   └── safety_measures.png                                            # Output screenshot image 2
     ├── Readme.md                                                          # Readme file which contains all the details and instructions about the project sample
-    ├── weather_server.py                                     # Notebook file to excute the project sample
-    ├── Air-Quality-Index_server.py                                     # Notebook file to excute the project sampl
-    ├── LLM_inference_server.py                                     # Notebook file to excute the project sample
+    ├── weather_server.py                                                  # python file that retrives weather information
+    ├── Air-Quality-Index_server.py                                        # python file that retrives Air Quality Index(AQI) information
+    ├── LLM_inference_server.py                                            # python file which gives safety guidelines based on weather and AQI reports
     ├── weatherAQI_MCP_Assistant.ipynb                                     # Notebook file to excute the project sample
     ├── pyproject.toml                                                     # Requirements for the project sample
     └── uv.lock                                                            # File which captures the packages installed for the project sample
@@ -148,7 +165,7 @@ To install any software using commands, Open a new terminal window by right-clic
    ```
    uv run huggingface-cli download Qwen/Qwen2.5-3B-Instruct
    ```
-3. Run all MCP servers locally:\
+3. Run all MCP servers locally:
 
    This sample has 3 MCP servers (runs on 3 different ports):
      - **Weather** (port no - 8000)
@@ -172,7 +189,7 @@ To install any software using commands, Open a new terminal window by right-clic
    
 4. Launch Jupyter Lab and Run the notebook:
    
-   Open the [WeatherAQI MCP Assistant](./weatherAQI_MCP_Assistant.ipynb) notebook in the Jupyter Lab.
+   Open the [WeatherAQI MCP Assistant](./WeatherAQI%20MCP%20Assistant.ipynb) notebook in the Jupyter Lab.
    - In the Jupyter Lab go to the kernel menu in the top-right corner of the notebook interface and choose default kernel i.e. `Python 3 (ipykernel)` from the available kernels list and run the code cells one by one in the notebook.
    ```
    uv run jupyter lab
