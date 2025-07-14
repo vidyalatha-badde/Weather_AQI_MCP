@@ -21,6 +21,23 @@ This assistant helps users stay informed about environmental conditions and make
 
 This diagram illustrates how the WeatherAQI MCP Assistant operates end-to-end within an AI PC environment, combining MCP Compliant Servers, an MCP client, and external APIs.
 
+**User input:**
+   - User enters the desired location name (e.g. "Tokyo") to get the weather and AQI data of that particular area. MCP Client (Weather & AQI Advisory) uses this input and sends this to two different MCP servers.
+     
+**Air Quality Index MCP server:**
+   - The location received from the MCP client is converted to corresponding latitude and longitude using [geocoding API](https://open-meteo.com/en/docs/geocoding-api) which in turn used by the air pollution API.
+   - The Air Quality Index (AQI) server uses the latitude and longitude parameters received from the above mentioned geocoding API to make an API call to [OpenWeatherMap Air Pollution API](https://openweathermap.org/api/air-pollution) to get AQI data and pollutant levels. This AQI data is returned to the MCP client.
+
+**Weather MCP server:**
+   - The location received from the MCP client is converted to corresponding latitude and longitude using [geocoding API](https://open-meteo.com/en/docs/geocoding-api) which in turn used by the weather forecast API.
+   - The Weather server uses the latitude and longitude parameters received from the above mentioned geocoding API to make an API call to the [Open-Meteo Weather Forecast API](https://open-meteo.com/en/docs#api_response) to get current temperature, wind speed, and other weather details. This weather data is also returned to the MCP client.
+
+**LLM Inferencing MCP server:**
+   - The MCP client then passes both the weather and AQI reports to the LLM (large language model) Inferencing server. The LLM generates personalized safety guidelines based on the combined information.
+
+**Final result:**
+   - The final output from the LLM (e.g., safety advice, health risks, and precautions) is sent back to the MCP client, which presents it to the user.
+
 ![How it works](./assets/WeatherAQI_MCP_Assistant_Workflow.png)
 
 ---
