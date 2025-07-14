@@ -86,7 +86,7 @@ This project uses two public APIs to provide real-time weather and air quality i
       ```
       AQI_API_KEY=<aqi_key>
       ```
-
+> **NOTE**: API activation could take couple of hours. Immediate usage might lead to errors (e.g."cod":401, "message": "Invalid API key).
 ---
 
 ## Pre-requisites
