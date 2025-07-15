@@ -20,6 +20,7 @@ This assistant helps users stay informed about environmental conditions and make
 ## Sample Workflow
 
 This diagram illustrates how the WeatherAQI MCP Assistant operates end-to-end within an AI PC environment, combining MCP Compliant Servers, an MCP client, and external APIs.
+The servers are created using FastMCP which is a high-level, Pythonic framework inspired by FastAPI that simplifies MCP implementation and make it much easier to build MCP servers and clients.
 
 **User input:**
    - User enters the desired location name (e.g. "Tokyo") to get the weather and AQI data of that particular area. MCP Client (Weather & AQI Advisory) uses this input and sends this to two different MCP servers.
