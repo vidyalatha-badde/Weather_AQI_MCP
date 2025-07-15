@@ -154,7 +154,7 @@ To install any software using commands, Open a new terminal window by right-clic
    cd <path/to/WeatherAQI MCP Assistant/folder>
    ```
    
-2. Log in to Hugging Face, generate a token, and download the required models and datasets:\
+2. Log in to Hugging Face, generate a token, and download the required model:\
 
    `huggingface-cli` lets you interact directly with the Hugging Face Hub from a terminal. Log in to [Huggingface](https://huggingface.co/) with your credentials. You need a [User Access Token](https://huggingface.co/docs/hub/security-tokens) from your [Settings page](https://huggingface.co/settings/tokens). The User Access Token is used to authenticate your identity to the Hub.\
    Once you have your token, run the following command in your terminal.
