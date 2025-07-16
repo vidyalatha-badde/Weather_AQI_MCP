@@ -109,20 +109,20 @@ async def get_aqi(location: str) -> str:
         }
 
         return f"""
-  - Location: {location}, {country}
-  - Coordinates: {lat}, {lon}
-  - AQI Level: {aqi} ({levels.get(aqi, 'Unknown')})
-
-Pollutants (μg/m3):
-- CO: {components.get('co', 'N/A')}
-- NO: {components.get('no', 'N/A')}
-- NO2: {components.get('no2', 'N/A')}
-- O3: {components.get('o3', 'N/A')}
-- SO2: {components.get('so2', 'N/A')}
-- PM2.5: {components.get('pm2_5', 'N/A')}
-- PM10: {components.get('pm10', 'N/A')}
-- NH3: {components.get('nh3', 'N/A')}
-"""
+    - Location: {location}, {country}
+    - Coordinates: {lat}, {lon}
+    - AQI Level: {aqi} ({levels.get(aqi, 'Unknown')})
+    
+     Pollutants (μg/m3):
+     - CO: {components.get('co', 'N/A')}
+     - NO: {components.get('no', 'N/A')}
+     - NO2: {components.get('no2', 'N/A')}
+     - O3: {components.get('o3', 'N/A')}
+     - SO2: {components.get('so2', 'N/A')}
+     - PM2.5: {components.get('pm2_5', 'N/A')}
+     - PM10: {components.get('pm10', 'N/A')}
+     - NH3: {components.get('nh3', 'N/A')}
+     """
     except Exception as e:
         return f"Failed to parse AQI response: {str(e)}"
 
