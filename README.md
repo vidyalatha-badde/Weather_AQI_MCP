@@ -1,8 +1,10 @@
-# WeatherAQI MCP Assistant
+# Weather-AQI MCP Assistant
 ## Introduction
-The sample **`WeatherAQI MCP Assistant`** is an interactive, asynchronous assistant that brings together real-time weather and AQI (Air Quality Index) data using powerful MCP (Model Context Protocol) servers.
+The sample **`Weather-AQI MCP Assistant`** is an interactive, asynchronous assistant that brings together real-time weather and AQI (Air Quality Index) data using powerful **MCP** (Model Context Protocol) servers.
+There are 3 MCP servers used in this sample which are created using **`FastMCP`** which is a high-level, Pythonic framework inspired by FastAPI that simplifies MCP implementation.\
 It seamlessly connects to dedicated weather and AQI tools on **Intel® Core™ Ultra Processors** then uses [**Qwen/Qwen2.5-3B-Instruct**](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct) to analyze the data and generate clear, actionable health and safety recommendations. The Qwen2.5-3B-Instruct model is loaded using the [**PyTorch XPU backend**](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html) to leverage Intel hardware acceleration.\
 This assistant helps users stay informed about environmental conditions and make better decisions for their well-being. Designed with async operations and SSE connections, it’s perfect for modern, event-driven pipelines.
+
 
 ## Table of Contents
 
@@ -45,16 +47,16 @@ The servers are created using FastMCP which is a high-level, Pythonic framework 
 
 ## Project Structure
 
-    WeatherAQI MCP Assistant/                                              # Project Sample folder
+    Weather-AQI MCP Assistant/                                              # Project Sample folder
     ├── assets/                                                            # Assets folder which contains the images and diagrams
     │   ├── Generating_safety_guidelines_using_Pytorch_XPU.png             # Output screenshot image 1
     │   ├── WeatherAQI_MCP_Assistant_Workflow.png                          # Workflow image
     │   └── safety_measures.png                                            # Output screenshot image 2
     ├── Readme.md                                                          # Readme file which contains all the details and instructions about the project sample
     ├── weather_server.py                                                  # python file that retrives weather information
-    ├── Air-Quality-Index_server.py                                        # python file that retrives Air Quality Index(AQI) information
+    ├── Air_Quality_Index_server.py                                        # python file that retrives Air Quality Index(AQI) information
     ├── LLM_inference_server.py                                            # python file which gives safety guidelines based on weather and AQI reports
-    ├── weatherAQI_MCP_Assistant.ipynb                                     # Notebook file to excute the project sample
+    ├── weather_AQI_MCP_Assistant.ipynb                                     # Notebook file to excute the project sample
     ├── pyproject.toml                                                     # Requirements for the project sample
     └── uv.lock                                                            # File which captures the packages installed for the project sample
 
@@ -152,7 +154,7 @@ To install any software using commands, Open a new terminal window by right-clic
    
 1. In the Command Prompt/terminal, navigate to `WeatherAQI MCP Assistant` folder after cloning the sample:
    ```
-   cd <path/to/WeatherAQI MCP Assistant/folder>
+   cd <path/to/Weather-AQI MCP Assistant/folder>
    ```
    
 2. Log in to Hugging Face, generate a token, and download the required model:\
@@ -177,20 +179,20 @@ To install any software using commands, Open a new terminal window by right-clic
   
    Terminal 1: Start the Weather MCP server
    ```
-   uv run weather_server.py
+   uv run 1_weather_server.py
    ```
    Terminal 2: Start the AQI MCP server
    ```
-   uv run Air-Quality-Index_server.py
+   uv run 2_Air_Quality_Index_server.py
    ```
    Terminal 3: Start the LLM Inferencing MCP server
    ```
-   uv run LLM_inference_server.py
+   uv run 3_LLM_inference_server.py
    ```
    
 4. Launch Jupyter Lab and Run the notebook:
    
-   Open the [WeatherAQI MCP Assistant](./WeatherAQI%20MCP%20Assistant.ipynb) notebook in the Jupyter Lab.
+   Open the [Weather-AQI MCP Assistant](./Weather-AQI%20MCP%20Assistant.ipynb) notebook in the Jupyter Lab.
    - In the Jupyter Lab go to the kernel menu in the top-right corner of the notebook interface and choose default kernel i.e. `Python 3 (ipykernel)` from the available kernels list and run the code cells one by one in the notebook.
    ```
    uv run jupyter lab
@@ -208,6 +210,7 @@ To install any software using commands, Open a new terminal window by right-clic
 
 - **Dependency Issues:** Run `uv clean` and then `uv sync`.
 - **File Access Issues:** Restart the kernel and run the cells again.
+- **API_KEY Issues:** Make sure the API_KEY for openweathermap is activated before using it.
 
 ---
 
