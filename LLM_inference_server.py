@@ -36,21 +36,21 @@ async def safety_guidelines(weather_report: str, aqi_report: str) -> str:
     if generator is None:
         return "The language model could not be initialized. Please check your model path and device setup."
 
-    prompt = f"""
-You are a health assistant. Given this weather and air quality:
-
-Weather Report:
-{weather_report}
-
-AQI Report:
-{aqi_report}
-
-Provide:
-1. Overall outdoor safety level. Can I go for parasailing based on the weather report?
-2. Health risks.
-3. Precautions.
-4. Special advice for sensitive groups.
-"""
+   prompt = f"""
+    You are a health assistant. Given this weather and air quality:
+    
+    Weather Report:
+    {weather_report}
+    
+    AQI Report:
+    {aqi_report}
+    
+    Provide:
+    1. Overall outdoor safety level. Can I go for parasailing based on the weather report?
+    2. Health risks.
+    3. Precautions.
+    4. Special advice for sensitive groups.
+    """
 
     try:
         output = generator(
