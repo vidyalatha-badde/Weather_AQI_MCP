@@ -1,3 +1,4 @@
+
 from fastmcp import FastMCP
 import httpx
 import os
@@ -117,7 +118,7 @@ async def get_aqi(location: str) -> str:
     - Location: {location}, {country}
     - Coordinates: {lat}, {lon}
     - AQI Level: {aqi} ({levels.get(aqi, 'Unknown')})
-    
+
      Pollutants (μg/m3):
      - CO: {components.get('co', 'N/A')}
      - NO: {components.get('no', 'N/A')}
