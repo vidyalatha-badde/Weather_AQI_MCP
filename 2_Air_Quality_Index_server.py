@@ -1,4 +1,4 @@
-﻿from fastmcp import FastMCP
+from fastmcp import FastMCP
 import httpx
 import os
 from dotenv import load_dotenv
@@ -10,11 +10,12 @@ mcp = FastMCP("Air Quality Index", host="0.0.0.0", port=8001)
 load_dotenv()
 OPENWEATHERMAP_API_KEY = os.getenv("AQI_API_KEY")
 
-# Geocoding function to get latitude/longitude from location name using Open-Meteo
+
+# Geocoding function to get latitude/longitude from location using Open-Meteo
 async def get_coordinates(location: str):
     """
     Fetch the geographical coordinates (latitude and longitude)
-    and country name for a given location name using the Open-Meteo Geocoding API.
+    and country name for a given location using the Open-Meteo Geocoding API.
 
     Args:
         location (str): The name of the location to geocode (e.g., 'Delhi').
@@ -27,17 +28,28 @@ async def get_coordinates(location: str):
         If the location cannot be found, returns (None, None, None).
     """
     geo_url = f"https://geocoding-api.open-meteo.com/v1/search?name={location}&count=1"
-    async with httpx.AsyncClient() as client:
-        geo_response = await client.get(geo_url)
-        geo_data = geo_response.json()
+    try:
+        async with httpx.AsyncClient() as client:
+            geo_response = await client.get(geo_url)
+            geo_response.raise_for_status()  # raises HTTPStatusError for bad responses
+            geo_data = geo_response.json()
 
-    if "results" not in geo_data or not geo_data["results"]:
-        return None, None, None
+        if "results" not in geo_data or not geo_data["results"]:
+            return None, None, None
 
-    result = geo_data["results"][0]
-    return result["latitude"], result["longitude"], result["country"]
+        result = geo_data["results"][0]
+        return result["latitude"], result["longitude"], result["country"]
+
+    except httpx.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+    except Exception as err:
+        print(f"An error occurred: {err}")
+
+    return None, None, None
+
 
 # AQI Tool
+
 
 @mcp.tool()
 async def get_aqi(location: str) -> str:
@@ -98,15 +110,8 @@ async def get_aqi(location: str) -> str:
     try:
         aqi = aqi_data["list"][0]["main"]["aqi"]
         components = aqi_data["list"][0]["components"]
-
         # AQI level explanation based on OpenWeatherMap
-        levels = {
-            1: "Good",
-            2: "Fair",
-            3: "Moderate",
-            4: "Poor",
-            5: "Very Poor"
-        }
+        levels = {1: "Good", 2: "Fair", 3: "Moderate", 4: "Poor", 5: "Very Poor"}
 
         return f"""
     - Location: {location}, {country}
@@ -125,6 +130,7 @@ async def get_aqi(location: str) -> str:
      """
     except Exception as e:
         return f"Failed to parse AQI response: {str(e)}"
+
 
 if __name__ == "__main__":
     mcp.run("sse")
