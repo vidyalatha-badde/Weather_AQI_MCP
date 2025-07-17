@@ -6,8 +6,8 @@ mcp = FastMCP("LLM-Inference", host="0.0.0.0", port=8002)
 
 
 try:
-    # Path to the local snapshot folder inside ~/.cache
-    local_model_path = "C:/Users/vbaddex/.cache/huggingface/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1/"
+    # Path to the local snapshot folder inside ~/.cache where the model is downloaded
+    local_model_path = "<path/to/snapshot/folder/of/locally/downloaded/model/Qwen/Qwen2.5-3B-Instruct>"
     tokenizer = AutoTokenizer.from_pretrained(local_model_path)
     model = AutoModelForCausalLM.from_pretrained(
         local_model_path, local_files_only=True
