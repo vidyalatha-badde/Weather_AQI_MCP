@@ -47,16 +47,16 @@ The servers are created using FastMCP which is a high-level, Pythonic framework 
 
 ## Project Structure
 
-    Weather-AQI MCP Assistant/                                              # Project Sample folder
+    Weather-AQI MCP Assistant/                                             # Project Sample folder
     ├── assets/                                                            # Assets folder which contains the images and diagrams
     │   ├── Generating_safety_guidelines_using_Pytorch_XPU.png             # Output screenshot image 1
     │   ├── WeatherAQI_MCP_Assistant_Workflow.png                          # Workflow image
     │   └── safety_measures.png                                            # Output screenshot image 2
     ├── Readme.md                                                          # Readme file which contains all the details and instructions about the project sample
-    ├── weather_server.py                                                  # python file that retrives weather information
-    ├── Air_Quality_Index_server.py                                        # python file that retrives Air Quality Index(AQI) information
-    ├── LLM_inference_server.py                                            # python file which gives safety guidelines based on weather and AQI reports
-    ├── weather_AQI_MCP_Assistant.ipynb                                     # Notebook file to excute the project sample
+    ├── 1_weather_server.py                                                # python file that retrives weather information
+    ├── 2_Air_Quality_Index_server.py                                      # python file that retrives Air Quality Index(AQI) information
+    ├── 3_LLM_inference_server.py                                          # python file which gives safety guidelines based on weather and AQI reports
+    ├── weather_AQI_MCP_Assistant.ipynb                                    # Notebook file to excute the project sample
     ├── pyproject.toml                                                     # Requirements for the project sample
     └── uv.lock                                                            # File which captures the packages installed for the project sample
 
