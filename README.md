@@ -192,7 +192,7 @@ To install any software using commands, Open a new terminal window by right-clic
    
 4. Launch Jupyter Lab and Run the notebook:
    
-   Open the [Weather-AQI MCP Assistant](./Weather-AQI%20MCP%20Assistant.ipynb) notebook in the Jupyter Lab.
+   Open the [Weather-AQI MCP Assistant](./Weather_AQI_MCP_Assistant.ipynb) notebook in the Jupyter Lab.
    - In the Jupyter Lab go to the kernel menu in the top-right corner of the notebook interface and choose default kernel i.e. `Python 3 (ipykernel)` from the available kernels list and run the code cells one by one in the notebook.
    ```
    uv run jupyter lab
